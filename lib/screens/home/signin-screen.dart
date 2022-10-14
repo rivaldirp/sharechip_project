@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sharechip_project/screens/home/home_screen.dart';
 import 'package:sharechip_project/screens/home/welcome-screen.dart';
 
 import '../../reusable-widget.dart';
@@ -78,9 +80,17 @@ class SignIn extends StatelessWidget {
               height: 41,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 81, right: 81),
-              child: firebaseUIButton(context, "Sign In", () {}),
-            )
+                padding: EdgeInsets.only(left: 81, right: 81),
+                child: firebaseUIButton(context, "Sign In", () {
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  });
+                }))
           ],
         ),
       ),
