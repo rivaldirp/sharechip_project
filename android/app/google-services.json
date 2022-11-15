@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "633647897094",
+      "project_id": "login-sharechip",
+      "storage_bucket": "login-sharechip.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:633647897094:android:b9ac454964223e4eee8187",
+          "android_client_info": {
+            "package_name": "com.example.sharechip_project"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "633647897094-udeuri1l5fl2mat9nsnoukj2q6hj28mc.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDI3kefw2s6FIUu_Ndj87GkwHUhKeS8zsk"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "633647897094-udeuri1l5fl2mat9nsnoukj2q6hj28mc.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

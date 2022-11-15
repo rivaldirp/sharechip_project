@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:sharechip_project/screens/home/home_screen.dart';
+import 'package:sharechip_project/screens/home/home-screen.dart';
 import 'package:sharechip_project/screens/home/welcome-screen.dart';
 
 import '../../reusable-widget.dart';
