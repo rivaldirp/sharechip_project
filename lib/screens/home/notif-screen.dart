@@ -12,20 +12,6 @@ class NotifScreen extends StatefulWidget {
 class _NotifScreenState extends State<NotifScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF01908E),
-        title: Text("Notification"),
-        leading: GestureDetector(
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onTap: (() {
-            Navigator.pop(context);
-          }),
-        ),
-      ),
-    );
+    return Scaffold();
   }
 }

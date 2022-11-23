@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -36,10 +37,41 @@ class Wells extends StatelessWidget {
               style: TextStyle(fontSize: 13, fontFamily: 'InterRegular'),
             ),
             SizedBox(
-              height: 30,
+              height: 213,
+            ),
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                text: 'Syarat dan Ketentuan',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 136, 185, 218),
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('SYARAT & KETENTUAN'),
+                          content: Container(
+                            child: ListView(
+                              children: [
+                                Text(
+                                    'Dengan masuk ke akun Anda, Anda harus menyetujui syarat dan ketentuan kami.\nFAQ\n\nBagaimana cara masuk ke akun Share Chip saya?\n\nIkuti langkah-langkah berikut untuk masuk atau login ke akun Share Chip Anda:\n1. Buka aplikasi Share Chip.\n2. Pilih menu “Login”\n3. Masukkan alamat email serta kata sandi yang telah terdaftar di Share Chip, lalu klik “Login“.\n\nMengapa saya tidak bisa masuk ke akun Share Chip saya?\n\nAda beberapa hal yang menyebabkan Anda tidak bisa masuk ke akun Share Chip Anda, seperti: \n1. Anda memasukkan alamat email dan kata sandi yang salah. Pastikan Anda sudah memasukkan alamat email dan kata sandi yang benar dan sesuai. \n2. Anda memasukkan alamat email yang belum terdaftar pada akun Google atau Share Chip (belum melakukan registrasi).'),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
+            ])),
+            SizedBox(
+              height: 8,
             ),
             Container(
-              padding: EdgeInsets.only(left: 41, right: 41),
+              padding: EdgeInsets.only(left: 61, right: 61),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -47,7 +79,7 @@ class Wells extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
                     elevation: 0,
-                    primary: Color(0xFFF5F5F5),
+                    primary: Color.fromARGB(255, 154, 190, 213),
                     minimumSize: Size(10, 46)),
                 onPressed: () async {
                   await FirebaseServices().signInWithGoogle();
@@ -73,7 +105,7 @@ class Wells extends StatelessWidget {
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'InterRegular',
-                            color: Color(0xFF01908E)),
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ],
                   ),

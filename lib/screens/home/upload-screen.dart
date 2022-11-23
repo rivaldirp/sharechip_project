@@ -246,6 +246,7 @@ class _UpScreenState extends State<UpScreen> {
                       'pTittle': titleController.text.toString(),
                       'pDescription': descController.text.toString(),
                       'pSourceCode': keterController.text.toString(),
+                      'pLike': 0.toInt(),
                       'uEmail': user!.email.toString(),
                       'uNick': user!.displayName.toString(),
                       'uPepe': user!.photoURL.toString(),
@@ -282,10 +283,10 @@ class _UpScreenState extends State<UpScreen> {
     Fluttertoast.showToast(
         msg: message.toString(),
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        backgroundColor: Color(0xFF01908E),
-        textColor: Colors.grey[100],
-        fontSize: 16.0);
+        backgroundColor: Color.fromARGB(255, 81, 128, 128),
+        textColor: Color.fromARGB(255, 255, 255, 255),
+        fontSize: 13.0);
   }
 }

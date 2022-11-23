@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DiscussScreen extends StatefulWidget {
   const DiscussScreen({super.key});
@@ -12,65 +14,43 @@ class DiscussScreen extends StatefulWidget {
 class _DiscussScreenState extends State<DiscussScreen> {
   @override
   Widget build(BuildContext context) {
+    final Uri url = Uri.parse("https://t.me/+jfjXdrI-RV9hY2Jl");
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF01908E),
-        title: Text("Discussion"),
-        leading: GestureDetector(
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onTap: (() {
-            Navigator.pop(context);
-          }),
-        ),
-      ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.only(left: 79, right: 79),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  elevation: 0,
-                  primary: Color(0xFF01908E),
-                  minimumSize: Size(10, 46)),
-              onPressed: () async {},
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/whatsapp.png",
-                      height: 31,
-                      width: 31,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    const Text(
-                      "WhatsApp",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'InterRegular',
-                          color: Color.fromARGB(255, 238, 243, 243)),
-                    ),
-                  ],
+            child: Row(
+              children: [
+                Text(
+                  "SHARE ",
+                  style: TextStyle(
+                      fontSize: 33,
+                      fontFamily: 'InterBold',
+                      color: Color(0xFF01908E)),
                 ),
-              ),
+                Text(
+                  "CHIP",
+                  style: TextStyle(
+                      fontSize: 33,
+                      fontFamily: 'InterBold',
+                      color: Color(0xFF0c6494)),
+                ),
+              ],
             ),
           ),
+          Text(
+            "Join with us!",
+            style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'InterBold',
+                color: Color.fromARGB(255, 77, 91, 87)),
+          ),
           SizedBox(
-            height: 39,
+            height: 41,
           ),
           Container(
             padding: EdgeInsets.only(left: 79, right: 79),
@@ -83,12 +63,17 @@ class _DiscussScreenState extends State<DiscussScreen> {
                   elevation: 0,
                   primary: Color(0xFF01908E),
                   minimumSize: Size(10, 46)),
-              onPressed: () async {},
+              onPressed: () {
+                launchUrl(url);
+              },
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      width: 13,
+                    ),
                     Image.asset(
                       "assets/telegram.png",
                       height: 26,
@@ -96,7 +81,7 @@ class _DiscussScreenState extends State<DiscussScreen> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: 28,
+                      width: 24,
                     ),
                     const Text(
                       "Telegram",
@@ -111,8 +96,63 @@ class _DiscussScreenState extends State<DiscussScreen> {
               ),
             ),
           ),
+          SizedBox(
+            height: 9,
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 79, right: 79),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  elevation: 0,
+                  primary: Color(0xFF01908E),
+                  minimumSize: Size(10, 46)),
+              onPressed: () async {
+                toastMessage('under maintance');
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/discord.png",
+                      height: 42,
+                      width: 42,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    const Text(
+                      "Discord",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'InterRegular',
+                          color: Color.fromARGB(255, 238, 243, 243)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       )),
     );
+  }
+
+  void toastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 81, 128, 128),
+        textColor: Color.fromARGB(255, 255, 255, 255),
+        fontSize: 13.0);
   }
 }

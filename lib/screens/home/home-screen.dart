@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sharechip_project/screens/home/beranda-screen.dart';
 import 'package:sharechip_project/screens/home/discuss-screen.dart';
-import 'package:sharechip_project/screens/home/notif-screen.dart';
 import 'package:sharechip_project/screens/home/profile-screen.dart';
-import 'package:sharechip_project/screens/home/signin-screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,12 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   PageController _pageController = PageController();
-  List<Widget> _screens = [
-    BerandaScreen(),
-    DiscussScreen(),
-    NotifScreen(),
-    ProfilScreen()
-  ];
+  List<Widget> _screens = [BerandaScreen(), DiscussScreen(), ProfilScreen()];
   void _onPageChanged(int index) {
     setState(() {
       _selectedIndex = index;
@@ -48,26 +41,19 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Color(0xFF01908E),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_rounded),
             label: 'Discussion',
-            backgroundColor: Color(0xFF01908E),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notification',
-            backgroundColor: Color(0xFF01908E),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
-            backgroundColor: Color(0xFF01908E),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromARGB(255, 232, 232, 232),
+        selectedItemColor: Color(0xFF01908E),
+        showUnselectedLabels: false,
         onTap: _onItemTapped,
       ),
     );
