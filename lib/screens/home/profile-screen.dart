@@ -28,48 +28,52 @@ class _ProfilScreenState extends State<ProfilScreen> {
           children: [
             Expanded(
               flex: 4,
-              child: Column(
-                children: [
-                  Container(
-                    height: 120,
-                    width: 120,
-                    margin: const EdgeInsets.only(
-                      top: 100,
-                      bottom: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: Offset(2, 2),
-                          blurRadius: 10,
+              child: ListView(
+                children: 
+                  [Column(
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        margin: const EdgeInsets.only(
+                          top: 100,
+                          bottom: 8,
                         ),
-                      ],
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            FirebaseAuth.instance.currentUser!.photoURL!),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(2, 2),
+                              blurRadius: 10,
+                            ),
+                          ],
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                FirebaseAuth.instance.currentUser!.photoURL!),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Text(
-                    "${FirebaseAuth.instance.currentUser!.displayName}",
-                    style: TextStyle(
-                      fontFamily: "Montserrat",
-                      color: Color(0xFF0c6494),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const Text(
-                    "Newbie",
-                    style: TextStyle(
-                      fontFamily: "Montserrat",
-                      color: Colors.black54,
-                      fontSize: 16,
-                    ),
+                      Text(
+                        "${FirebaseAuth.instance.currentUser!.displayName}",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          color: Color(0xFF0c6494),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const Text(
+                        "Newbie",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

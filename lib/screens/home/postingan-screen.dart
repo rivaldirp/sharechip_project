@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,6 +24,8 @@ class _PostinganScreenState extends State<PostinganScreen> {
   DatabaseReference reference =
       FirebaseDatabase.instance.reference().child('Post List');
   TextEditingController searchController = TextEditingController();
+  final postRef = FirebaseDatabase.instance.reference().child('posts');
+  FirebaseAuth _auth = FirebaseAuth.instance;
   String _uid;
 
   _PostinganScreenState(this._uid);
@@ -51,6 +55,7 @@ class _PostinganScreenState extends State<PostinganScreen> {
           SizedBox(
             height: 9,
           ),
+          
           Expanded(
               child: Padding(
             padding: const EdgeInsets.only(left: 21, right: 21),
@@ -58,7 +63,13 @@ class _PostinganScreenState extends State<PostinganScreen> {
               query: dbRef.child('Post List'),
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
+                    final User? user = _auth.currentUser;
                 String tempTitle = snapshot.child('uid').value.toString();
+                int like = int.parse(snapshot.child('pLike').value.toString());
+                int dislike = int.parse(snapshot.child('pDislike').value.toString());
+                String isCo = snapshot.child('uLike').child(user!.uid.toString()).value.toString();
+                String isDik = snapshot.child('uDislike').child(user!.uid.toString()).value.toString();
+                int jumlik;
 
                 if (tempTitle.toLowerCase().startsWith(_uid.toLowerCase())) {
                   return Column(
@@ -194,31 +205,93 @@ class _PostinganScreenState extends State<PostinganScreen> {
                                         color: Color.fromARGB(40, 1, 144, 142)),
                                     child: Column(
                                       children: [
-                                        SizedBox(
-                                          height: 7,
-                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            LikeButton(
-                                              size: 24,
-                                              isLiked: false,
-                                              likeCount: 0,
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  icon : Builder(
+                                                    builder: (context) {
+                                                      if(isCo.toLowerCase().startsWith("true"))
+                                                      {return Icon(
+                                                          Icons.thumb_up,
+                                                          color: Color.fromARGB(255, 24, 78, 255),
+                                                          size: 24,
+                                                        );} else {
+                                                          return Icon(
+                                                          Icons.thumb_up,
+                                                          color: Colors.grey,
+                                                          size: 24,
+                                                        );
+                                                        }
+                                                    }
+                                                  ),
+                                                  onPressed: () {
+                                                    if (isDik.toLowerCase().startsWith("true")){
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pDislike' : dislike += -1});
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uDislike').child(user!.uid.toString()).set(false);
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pLike' : like += 1 });
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uLike').child(user!.uid.toString()).set(true);
+                                                    }
+                                                    else if (isCo.toLowerCase().startsWith("true")){
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pLike' : like += -1});
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uLike').child(user!.uid.toString()).set(false);
+                                                    }
+                                                    else {
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pLike' : like += 1 });
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uLike').child(user!.uid.toString()).set(true);
+                                                    }
+                                                  },
+                                                  
+                                                ),
+                                                Text(like.toString(), style: TextStyle(color: Colors.grey[600],
+                                                fontWeight: FontWeight.w500, fontFamily: 'InterRegular'
+                                                )),
+                                              ],
                                             ),
-                                            LikeButton(
-                                              likeBuilder: (bool isLiked) {
-                                                return Icon(
-                                                  Icons.cancel,
-                                                  color: isLiked
-                                                      ? Colors.deepPurpleAccent
-                                                      : Colors.grey,
-                                                  size: 24,
-                                                );
-                                              },
-                                              size: 24,
-                                              isLiked: false,
-                                              likeCount: 0,
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  icon : Builder(
+                                                    builder: (context) {
+                                                      if(isDik.toLowerCase().startsWith("true"))
+                                                      {return Icon(
+                                                          Icons.thumb_down,
+                                                          color: Color.fromARGB(255, 255, 24, 24),
+                                                          size: 24,
+                                                        );} else {
+                                                          return Icon(
+                                                          Icons.thumb_down,
+                                                          color: Colors.grey,
+                                                          size: 24,
+                                                        );
+                                                        }
+                                                    }
+                                                  ),
+                                                  onPressed: () {
+                                                    if (isCo.toLowerCase().startsWith("true")){
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pLike' : like += -1});
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uLike').child(user!.uid.toString()).set(false);
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pDislike' : dislike += 1});
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uDislike').child(user!.uid.toString()).set(true);
+                                                    }
+                                                    else if (isDik.toLowerCase().startsWith("true")){
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pDislike' : dislike += -1});
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uDislike').child(user!.uid.toString()).set(false);
+                                                    }
+                                                    else {
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).update({ 'pDislike' : dislike += 1 });
+                                                    postRef.child('Post List').child(snapshot.child('pId').value.toString()).child('uDislike').child(user!.uid.toString()).set(true);
+                                                    }
+                                                  },
+                                                  
+                                                ),
+                                                Text(dislike.toString(), style: TextStyle(color: Colors.grey[600],
+                                                fontWeight: FontWeight.w500, fontFamily: 'InterRegular'
+                                                )),
+                                              ],
                                             ),
                                             GestureDetector(
                                               onTap: (() => showDialog<String>(
@@ -270,9 +343,7 @@ class _PostinganScreenState extends State<PostinganScreen> {
                                             )
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 7,
-                                        ),
+                                       
                                       ],
                                     ),
                                   ),

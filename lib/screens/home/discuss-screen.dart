@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DiscussScreen extends StatefulWidget {
@@ -52,94 +53,54 @@ class _DiscussScreenState extends State<DiscussScreen> {
           SizedBox(
             height: 41,
           ),
-          Container(
-            padding: EdgeInsets.only(left: 79, right: 79),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
+          Link(
+            target: LinkTarget.blank,
+            uri: Uri.parse('https://t.me/+jfjXdrI-RV9hY2Jl'),
+            builder: (context, followLink) => 
+            Container(
+              padding: EdgeInsets.only(left: 79, right: 79),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    elevation: 0,
+                    primary: Color(0xFF01908E),
+                    minimumSize: Size(10, 46)),
+                onPressed: followLink,
+                child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 13,
+                      ),
+                      Image.asset(
+                        "assets/telegram.png",
+                        height: 26,
+                        width: 26,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 24,
+                      ),
+                      const Text(
+                        "Telegram",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'InterRegular',
+                            color: Color.fromARGB(255, 238, 243, 243)),
+                      ),
+                    ],
                   ),
-                  elevation: 0,
-                  primary: Color(0xFF01908E),
-                  minimumSize: Size(10, 46)),
-              onPressed: () {
-                launchUrl(url);
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 13,
-                    ),
-                    Image.asset(
-                      "assets/telegram.png",
-                      height: 26,
-                      width: 26,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 24,
-                    ),
-                    const Text(
-                      "Telegram",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'InterRegular',
-                          color: Color.fromARGB(255, 238, 243, 243)),
-                    ),
-                  ],
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: 9,
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 79, right: 79),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  elevation: 0,
-                  primary: Color(0xFF01908E),
-                  minimumSize: Size(10, 46)),
-              onPressed: () async {
-                toastMessage('under maintance');
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/discord.png",
-                      height: 42,
-                      width: 42,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    const Text(
-                      "Discord",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'InterRegular',
-                          color: Color.fromARGB(255, 238, 243, 243)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          
         ],
       )),
     );

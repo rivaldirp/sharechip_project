@@ -178,7 +178,7 @@ class _UpScreenState extends State<UpScreen> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         labelText: 'Description',
-                        hintText: 'Enter project description',
+                        hintText: 'Enter project description complete with tools and component',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                         hintStyle: TextStyle(
@@ -247,6 +247,7 @@ class _UpScreenState extends State<UpScreen> {
                       'pDescription': descController.text.toString(),
                       'pSourceCode': keterController.text.toString(),
                       'pLike': 0.toInt(),
+                      'pDislike': 0.toInt(),
                       'uEmail': user!.email.toString(),
                       'uNick': user!.displayName.toString(),
                       'uPepe': user!.photoURL.toString(),
