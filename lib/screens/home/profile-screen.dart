@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -65,14 +66,18 @@ class _ProfilScreenState extends State<ProfilScreen> {
                           fontSize: 16,
                         ),
                       ),
-                      const Text(
-                        "Newbie",
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          color: Colors.black54,
-                          fontSize: 16,
-                        ),
-                      ),
+                      RichText(text: TextSpan(
+                  text: 'logout',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      await FirebaseServices().googleSignOut();
+            
+                    },
+                  style: TextStyle(
+                    fontFamily: 'InterBold',
+                    color: Color.fromARGB(255, 177, 103, 103),
+                  )),),
+                      
                     ],
                   ),
                 ],
@@ -114,11 +119,8 @@ class _ProfilScreenState extends State<ProfilScreen> {
                             "${FirebaseAuth.instance.currentUser!.displayName}"),
                         listProfile(Icons.email, "Email",
                             "${FirebaseAuth.instance.currentUser!.email}"),
-                        listProfile(Icons.favorite, "Like", "-"),
-                        listProfile(
-                            Icons.workspace_premium_sharp, "Rank", "Newbie"),
                         SizedBox(
-                          height: 11,
+                          height: 41,
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -142,29 +144,8 @@ class _ProfilScreenState extends State<ProfilScreen> {
                                         PostinganScreen(user!.uid.toString())));
                           },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 197),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: Size(10, 28),
-                                backgroundColor:
-                                    Color.fromARGB(255, 211, 58, 31)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.exit_to_app),
-                                SizedBox(
-                                  width: 11,
-                                ),
-                                Text("Logout"),
-                              ],
-                            ),
-                            onPressed: () async {
-                              await FirebaseServices().googleSignOut();
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ),
+                        SizedBox(height: 101,),
+                        
                       ],
                     ),
                   ],

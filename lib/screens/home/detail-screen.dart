@@ -123,8 +123,15 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             SizedBox(
-              height: 11,
+              height: 41,
             ),
+            Center(child: Column(
+              children: [
+                Text(_nick),
+                Text(_time),
+              ],
+            )),
+            SizedBox(height: 21,)
           ],
         ),
       ),
